@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 
+const hasDuplicates = (array) => new Set(array).size !== array.length;
+
 const Obj = {
   fnArr: [
     {
@@ -46,7 +48,7 @@ const disabledFnArrCre = (Obj) => {
   let disabledOnLoadFns = [];
   for (let i = 0; i < Obj.fnArr.length; i++) {
     for (const obj in Obj.fnArr[i]) {
-      console.log({ obj });
+      //console.log({ obj });
       Obj.disabledFnKeys.find((el) => {
         if (el === obj) {
           disabledOnLoadFns.push(Obj.fnArr[i][obj]);
@@ -54,7 +56,6 @@ const disabledFnArrCre = (Obj) => {
       });
     }
   }
-  console.log({ disabledOnLoadFns });
   return disabledOnLoadFns;
 };
 
@@ -66,6 +67,18 @@ function App() {
   const [qvalue, setQValue] = useState(intialCode);
 
   function handleEditorChange(value, event) {
+    /****** */
+    let result = value.split(/\r?\n/);
+    result = result.filter((element) => element.trim().startsWith("function"));
+    result = result.map((element) => element.trim());
+    console.log({ result });
+    if (hasDuplicates(result)) {
+      setQValue(null);
+      setQValue((prev) => qvalueRef.current);
+      return;
+    }
+    /**** */
+
     for (let i = 0; i < disabledFnArray.length; i++) {
       if (value.includes(disabledFnArray[i]) === false) {
         setQValue(null);
