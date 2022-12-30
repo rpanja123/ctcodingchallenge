@@ -32,7 +32,13 @@ const Obj = {
       `
     }
   ],
-  disabledFnKeys: ["startOuter", "nestedStart", "nestedEnd", "endOuter"],
+  disabledFnKeys: [
+    "startOuter",
+    "nestedStart",
+    "nestedEnd",
+    "endOuter",
+    "nestedFnCall"
+  ],
   rules: { fnNames: ["abcOuter", "cbaOuter"] } // for preventing same name fnc
 };
 
