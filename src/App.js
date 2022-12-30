@@ -17,7 +17,7 @@ const Obj = {
       nestedEnd: `  }//end of innerFunction function `,
 
       nestedFnCall: `
-      innerFunction()`,
+      innerFunction();`,
 
       endOuter: `
     }//end of outerFunction function 
